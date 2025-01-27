@@ -9,11 +9,23 @@ dotenv.config();
 
 const app = express();
 
-// Configure CORS with specific options
+// Configure CORS to allow both development and production origins
+const allowedOrigins = [
+  'http://localhost:5173', // Vite's default port for development
+  'https://67976fbdbd733f56281731b9--fancy-selkie-f39a7d.netlify.app', // Deployed frontend origin
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173', // Vite's default port
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Block other origins
+    }
+  },
+  credentials: true, // Allow cookies and credentials
 }));
+
 app.use(express.json());
 
 // Connect to MongoDB with error handling
