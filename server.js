@@ -9,11 +9,17 @@ dotenv.config();
 
 const app = express();
 
+app.use(cors({
+  origin: '*',
+}));
+
+
 // Configure CORS to allow both development and production origins
 const allowedOrigins = [
   'http://localhost:5173', // Vite's default port for development
   'https://67976fbdbd733f56281731b9--fancy-selkie-f39a7d.netlify.app', // Deployed frontend origin
 ];
+
 
 app.use(cors({
   origin: function (origin, callback) {
