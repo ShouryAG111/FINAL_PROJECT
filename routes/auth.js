@@ -50,7 +50,7 @@ router.post('/signup', async (req, res) => {
     console.error('Signup error:', error);
     res.status(500).json({ 
       message: 'Error creating user',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+     
     });
   }
 });
@@ -92,7 +92,6 @@ router.post('/login', async (req, res) => {
     console.error('Login error:', error);
     res.status(500).json({ 
       message: 'Error logging in',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });
