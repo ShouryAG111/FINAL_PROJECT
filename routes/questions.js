@@ -220,7 +220,7 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(404).json({ message: 'Question not found' });
     }
     res.json({ message: 'Question deleted successfully' });
-  } catch (error) {
+  } catch (error){
     res.status(500).json({ message: 'Error deleting question' });
   }
 });
@@ -229,15 +229,15 @@ router.delete('/:id', auth, async (req, res) => {
 router.patch('/:id', auth, async (req, res) => {
   try {
     const question = await Question.findOneAndUpdate(
-      { _id: req.params.id, user: req.userId },
+      { _id: req.params.id, user: req.userId},
       req.body,
-      { new: true }
-    );
-    if (!question) {
+      { new: true }     
+    );                             
+    if (!question) {  
       return res.status(404).json({ message: 'Question not found' });
     }
     res.json(question);
-  } catch (error) {
+  } catch (error) { 
     res.status(500).json({ message: 'Error updating question' });
   }
 });
